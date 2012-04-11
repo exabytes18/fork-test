@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 int main(int argc, char **argv) {
-	int GB;
+	int MB;
 	int64_t *data;
 	char *argp;
 	size_t i, bytes;
@@ -17,26 +17,26 @@ int main(int argc, char **argv) {
 	double elapsed_time;
 	
 	if(argc != 2) {
-		printf("usage: ./fork #GB\n");
+		printf("usage: ./fork #MB\n");
 		exit(EXIT_FAILURE);
 	}
 	
 	errno = 0;
-	GB = strtol(argv[1], &argp, 0);
+	MB = strtol(argv[1], &argp, 0);
 	if(errno != 0) {
-		perror("Illegal GB value");
+		perror("Illegal MB value");
 		exit(EXIT_FAILURE);
-	} else if(argv[1] == argp || GB < 1) {
-		printf("Invalid GB value: must be positive integer\n");
+	} else if(argv[1] == argp || MB < 1) {
+		printf("Invalid MB value: must be positive integer\n");
 		exit(EXIT_FAILURE);
 	}
 	
-	bytes = (size_t)GB * (1024 * 1024 * 1024);
+	bytes = (size_t)MB * (1024 * 1024);
 	
 	/* Slash and burn; don't worry about free'ing */
 	data = malloc(bytes);
 	if(data == NULL) {
-		printf("Failed to malloc %d GB of memory\n", GB);
+		printf("Failed to malloc %d MB of memory\n", MB);
 		exit(EXIT_FAILURE);
 	}
 	
