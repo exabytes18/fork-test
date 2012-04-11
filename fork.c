@@ -50,6 +50,11 @@ int main(int argc, char **argv) {
 	child_pid = fork();
 	gettimeofday(&end, NULL);
 	
+	if(child_pid == -1) {
+		perror("Fork");
+		exit(EXIT_FAILURE);
+	}
+	
 	/* Make sure our memory is ok */
 	for(i = 0; i < bytes / sizeof(data[0]); i++) {
 		if(data[i] != (int64_t)i) {
