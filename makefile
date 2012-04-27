@@ -3,11 +3,11 @@ OPTS:=-pedantic -Wall -Wextra -O3
 
 .PHONY: clean
 
-all: fork
+all: alloc_test
 
-fork: fork.c
+alloc_test: alloc_test.c
 	$(CC) $(OPTS) -o $@ $^
 
 clean:
-	-rm -rf fork
+	-rm -rf alloc_test
 
